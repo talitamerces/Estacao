@@ -26,7 +26,7 @@ public class RemocaoAlimento extends AsyncTask<Void, Void, String> {
 
         if(alimento.getCodigo() != -1){
             if(FachadaBD.getInstancia().remover(alimento) == 0){
-                mensagem = "Problemas com ae remoção!";
+                mensagem = "Problemas com a remoção!";
             }else {
                 mensagem = "Alimento removido!";
             }

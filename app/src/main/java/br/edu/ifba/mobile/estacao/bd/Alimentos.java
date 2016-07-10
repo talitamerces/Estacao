@@ -54,8 +54,6 @@ public class Alimentos {
 
     @Override
     public String toString() {
-        return "Alimentos{" +
-                "nome='" + nome + '\'' +
-                '}';
+        return  nome;
     }
 }

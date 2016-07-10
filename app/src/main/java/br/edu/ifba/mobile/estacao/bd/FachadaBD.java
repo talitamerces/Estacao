@@ -36,10 +36,9 @@ public class FachadaBD extends SQLiteOpenHelper{
 
     private static String COMANDO_CRIACAO_TABELA_ALIMENTOS =
             "CREATE TABLE ALIMENTOS(" +
-                    "CODIGO INTEGER AUTOINCREMET, NOME TEXT, VALORNUTRICIONAL TEXT, ESTACAO TEXT," +
+                    "CODIGO INTEGER PRIMARY KEY AUTOINCREMENT, NOME TEXT, VALORNUTRICIONAL TEXT, ESTACAO TEXT," +
                     "CODIGOLOCAL INTEGER NOT NULL, "+
-                    "FOREIGN KEY(CODIGOLOCAL)REFERENCES LOCAIS(CODIGO), " +
-                    "PRIMARY KEY (CODIGO, CODIGOLOCAL))";
+                    "FOREIGN KEY(CODIGOLOCAL)REFERENCES LOCAIS(CODIGO))";
 
 
     private static String COMANDO_CRIACAO_TABELA_LOCAIS =
@@ -63,8 +62,9 @@ public class FachadaBD extends SQLiteOpenHelper{
 
         valores.put("NOME", alimentos.getNome());
         valores.put("VALORNUTRICIONAL", alimentos.getValorNutricional());
-        valores.put("CODIGOLOCAL", alimentos.getCodLocal());
         valores.put("ESTACAO", alimentos.getEstacao());
+        valores.put("CODIGOLOCAL", alimentos.getCodLocal());
+
 
         long codigo = db.insert("ALIMENTOS", null, valores);
 
@@ -80,8 +80,7 @@ public class FachadaBD extends SQLiteOpenHelper{
         valores.put("CODIGOLOCAL", alimentos.getCodLocal());
         valores.put("ESTACAO", alimentos.getEstacao());
 
-        long codigo = db.update("ALIMENTOS", valores, "CODIGO =  " +
-                alimentos.getCodigo(), null);
+        long codigo = db.update("ALIMENTOS", valores, "CODIGO =  " + alimentos.getCodigo(), null);
 
         return codigo;
     }
@@ -136,6 +135,8 @@ public class FachadaBD extends SQLiteOpenHelper{
                         cursor.getString(cursor.getColumnIndex("NOME")));
                 alimento.setValorNutricional(
                         cursor.getString(cursor.getColumnIndex("VALORNUTRICIONAL")));
+                alimento.setEstacao(
+                        cursor.getString(cursor.getColumnIndex("ESTACAO")));
                 alimento.setCodLocal(
                         cursor.getLong(cursor.getColumnIndex("CODIGOLOCAL")));
                 alimentos.add(alimento);
